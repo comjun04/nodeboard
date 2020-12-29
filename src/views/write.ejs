@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+  <head>
+    <%- include('./_head.ejs') %>
+  </head>
+
+  <body>
+    <%- include('./_nav.ejs') %>
+    
+    <main class="container-sm my-3">
+      <h1>새 글 작성</h1>
+      <form method="post">
+        <div class="mb-3">
+          <label for="title" class="form-label">제목</label>
+          <input name="title" id="title" class="form-control">
+        </div>
+        <div class="mb-3">
+          <label for="content" class="form-label">내용</label>
+          <textarea name="content" id="content" class="form-control" rows=10></textarea>
+        </div>
+        <input type="submit" value="저장" class="btn btn-success">
+      </form>
+    </main>
+
+    <%- include('./_tail.ejs') %>
+  </body>
+</html>

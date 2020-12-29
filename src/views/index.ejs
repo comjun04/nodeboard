@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+  <head>
+    <%- include('./_head.ejs') %>
+  </head>
+
+  <body>
+    <%- include('./_nav.ejs') %>
+    
+    <main class="container-fluid">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3">
+        
+        <% for (const article of articles) { %>
+        <article class="col my-2">
+          <div class="card">
+            <div class="card-body">
+              <p class="card-text"><small>Category</small></p>
+              <h4 class="card-title"><%= article.title %></h4>
+              <p class="card-text"><%= article.content %></p>
+            </div>
+          </div>
+
+        </article>
+        <% } %>
+      </div>
+    </main>
+
+    <%- include('./_tail.ejs') %>
+  </body>
+</html>
