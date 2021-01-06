@@ -3,13 +3,21 @@
   "version": "0.1.0",
   "main": "src/index.js",
   "repository": "https://github.com/comjun04/nodeboard.git",
-  "author": "comjun04 <comjun04@gmail.com>",
+  "author": "My Name <comjun04@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "start": "node src/index",
+    "test": "mocha"
+  },
   "dependencies": {
     "@koa/router": "^10.0.0",
     "ejs": "^3.1.5",
     "koa": "^2.13.0",
     "koa-bodyparser": "^4.3.0",
     "koa-views": "^7.0.0"
+  },
+  "devDependencies": {
+    "mocha": "^8.2.1",
+    "should": "^13.2.3"
   }
 }
