@@ -2,7 +2,7 @@ const path = require('path')
 const views = require('koa-views')
 const bodyParser = require('koa-bodyparser')
 
-const db = require('./database')
+const db = require('./database/handler')
 const router = require('./routes/index')
 
 const Koa = require('koa')
