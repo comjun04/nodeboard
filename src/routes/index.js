@@ -10,8 +10,15 @@ router.get('/', async ctx => {
   await ctx.render('index', { articles })
 })
 
-router.get('/article', async ctx => {
-  await ctx.render('article')
+router.get('/article/:id', async ctx => {
+  const articleExists = await db.article.exists(ctx.state.db, { id: ctx.params.id })
+  if (!articleExists) {
+    ctx.status = 404
+    return
+  }
+
+  const article = await db.article.get(ctx.state.db, { id: ctx.params.id })
+  await ctx.render('article', article)
 })
 
 router

@@ -9,8 +9,15 @@
     
     <main class="container-sm my-3">
       <p>Category</p>
-      <h1>Some Title</h1>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam egestas fermentum ante, in aliquet nisi euismod sed. Cras et facilisis nunc. Phasellus sodales vel metus ut sagittis. Ut sed libero nec nibh volutpat accumsan. Nunc augue nibh, congue eget diam sed, lacinia pulvinar sem. In sit amet arcu faucibus, pulvinar velit suscipit, egestas magna. Sed fermentum tortor purus, vel commodo massa hendrerit in. Proin feugiat vestibulum accumsan. Vivamus volutpat ullamcorper gravida. Nulla diam lectus, accumsan sit amet augue ac, sodales semper orci.</p>
+      <div class="text-break">
+        <h1><%= title %></h1>
+      </div>
+      <div class="text-end">
+        <a href="/edit/<%= id %>" class="btn btn-outline-dark"><i class="fas fa-edit"></i></a>
+        <button class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
+        </div>
+
+      <p class="mt-3"><%= content %></p>
     </main>
 
     <%- include('./_tail.ejs') %>
