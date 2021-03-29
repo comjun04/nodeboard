@@ -18,7 +18,9 @@
                 <small>Category</small>
                 <span style="float: right; font-size: 1.3em">
                   <a href="/edit/<%= article.id %>" class="btn btn-outline-dark"><i class="fas fa-edit"></i></a>
-                  <button class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
+                  <form method="POST" action="/article/<%= article.id %>/delete">
+                    <button type="submit" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
+                  </form>
                 </span>
               </p>
               <h4 class="card-title"><a href="/article/<%= article.id %>"><%= article.title %></a></h4>
