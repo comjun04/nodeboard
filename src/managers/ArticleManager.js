@@ -24,13 +24,13 @@ class ArticleManager {
     if (!articleData.title) throw new Error('title must not be empty')
     if (!articleData.content) throw new Error('content must not be empty')
 
-    debug('creating article to dataabse')
+    debug('creating article to database')
     const data = await dbquery.article.create(db, {
       title,
       content
     })
 
-    const article = new Article(this, data)
+    const article = new Article(this.app, data)
     this.cache.set(article.id, article)
 
     return article
@@ -50,7 +50,7 @@ class ArticleManager {
         const data = await dbquery.article.get(db, { id })
         if (!data) return null
 
-        const article = new Article(this, data)
+        const article = new Article(this.app, data)
         this.cache.set(article.id, article)
         return article
       }
@@ -65,7 +65,7 @@ class ArticleManager {
         if (this.cache.has(item)) d = this.cache.get(item)
         else {
           const dd = await dbquery.article.get(db, { id: item })
-          d = new Article(this, dd)
+          d = new Article(this.app, dd)
           this.cache.set(item, d)
         }
 

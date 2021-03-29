@@ -5,9 +5,10 @@ module.exports = async (db, data = {}) => {
   } = data
 
   switch (db.type) {
-    case 'internal':
-      const lastArticleId = db.obj.articles.length > 0 ?
-        articleList[articleList.length - 1].id :
+    case 'internal': {
+      const list = db.obj.articles
+      const lastArticleId = list.length > 0 ?
+        list[list.length - 1].id :
         -1
       const articleId = lastArticleId + 1
       
@@ -22,5 +23,6 @@ module.exports = async (db, data = {}) => {
         title,
         content
       }
+    }
   }
 }
