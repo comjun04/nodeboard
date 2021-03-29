@@ -7,14 +7,17 @@
   "license": "MIT",
   "scripts": {
     "start": "node src/index",
+    "debug": "DEBUG=nodeboard* node src/index",
     "test": "mocha"
   },
   "dependencies": {
     "@koa/router": "^10.0.0",
+    "debug": "^4.3.1",
     "ejs": "^3.1.5",
     "koa": "^2.13.0",
     "koa-bodyparser": "^4.3.0",
-    "koa-views": "^7.0.0"
+    "koa-views": "^7.0.0",
+    "lru-cache": "^6.0.0"
   },
   "devDependencies": {
     "mocha": "^8.2.1",
