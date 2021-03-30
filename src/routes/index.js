@@ -1,23 +1,23 @@
-const db = require('../database/index')
-
 const Router = require('@koa/router')
 const router = new Router()
 
 router.get('/', async ctx => {
   // TODO: apply new CRUD
-  const articleList = ctx.state.db.get('article')
-  const articles = articleList.slice().reverse()
+  const articleList = await ctx.state.app.articles.fetch({ limit: 10 })
+  const articles = [...articleList.values()].reverse()
+  console.log(articles[0])
   await ctx.render('index', { articles })
 })
 
 router.get('/article/:id', async ctx => {
-  const articleExists = await db.article.exists(ctx.state.db, { id: ctx.params.id })
-  if (!articleExists) {
+  const id = ctx.params.id
+  const article = await ctx.state.app.articles.fetch(id)
+  console.log(article)
+  if (!article) {
     ctx.status = 404
     return
   }
 
-  const article = await db.article.get(ctx.state.db, { id: ctx.params.id })
   await ctx.render('article', article)
 })
 
@@ -34,7 +34,7 @@ router
   }
 
   const { title, content } = data
-  await db.article.create(ctx.state.db, {
+  await ctx.state.app.articles.create({
     title,
     content
   })
@@ -45,35 +45,36 @@ router
 
 router
   .get('/edit/:id', async ctx => {
-    const articleExists = await db.article.exists(ctx.state.db, { id: ctx.params.id })
-    if (!articleExists) {
+    const id = ctx.params.id
+    const article = await ctx.state.app.articles.fetch(id)
+    if (!article) {
       ctx.status = 404
       return
     }
 
-  // NOTE: Get article
-  const article = await db.article.get(ctx.state.db, {
-    id: ctx.params.id
-  })
-  await ctx.render('write', article)
+    await ctx.render('write', article)
 })
   .post('/edit/:id', async ctx => {
     // TODO: 글이 삭제되었는지 우선 확인
+    const id = ctx.params.id
+    const article = await ctx.state.app.articles.fetch(id)
+    if (!article) {
+      ctx.status = 404
+      return
+    }
 
     const { title, content } = ctx.request.body
-
     if (!title || !content) {
       ctx.status = 400
       return
     }
 
-    await db.article.edit(ctx.state.db, {
-      id: ctx.params.id,
+    await article.edit({
       title,
       content
     })
 
-    await ctx.redirect(`/article/${ctx.params.id}`)
+    await ctx.redirect(`/article/${id}`)
   })
 
 module.exports = router
