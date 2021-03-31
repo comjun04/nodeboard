@@ -1,25 +1,44 @@
 <!doctype html>
 <html>
-  <head>
-    <%- include('./_head.ejs') %>
-  </head>
 
-  <body>
-    <%- include('./_nav.ejs') %>
-    
-    <main class="container-sm my-3">
-      <p>Category</p>
-      <div class="text-break">
-        <h1><%= title %></h1>
-      </div>
-      <div class="text-end">
-        <a href="/edit/<%= id %>" class="btn btn-outline-dark"><i class="fas fa-edit"></i></a>
-        <button class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
-        </div>
+<head>
+  <%- include('./_head.ejs') %>
+</head>
 
-      <p class="mt-3"><%= content %></p>
-    </main>
+<body>
+  <%- include('./_nav.ejs') %>
 
-    <%- include('./_tail.ejs') %>
-  </body>
+  <main class="container-sm my-3">
+    <p>Category</p>
+    <div class="text-break">
+      <h1><%= title %></h1>
+    </div>
+    <div class="text-end">
+      <form method="POST" action="/article/<%= id %>/delete" onsubmit="return confirmDelete()">
+        <a href="/article/<%= id %>/edit" class="btn btn-outline-dark">
+          <i class="fas fa-edit"></i> <span class="d-none d-md-inline">수정</span>
+        </a>
+        <button type="submit" class="btn btn-outline-danger">
+          <i class="fas fa-trash-alt"></i> <span class="d-none d-md-inline">삭제</span>
+        </button>
+      </form>
+    </div>
+
+    <p class="mt-3"><%= content %></p>
+  </main>
+
+  <%- include('./_tail.ejs') %>
+
+  <script>
+    function confirmDelete() {
+      const answer = confirm('정말로 이 글을 삭제할까요?')
+      if (answer) {
+        alert('delete check test')
+      }
+
+      return answer
+    }
+  </script>
+</body>
+
 </html>

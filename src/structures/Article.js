@@ -3,6 +3,7 @@ const dbquery = require('../database/methods')
 class Article {
   constructor (app, data) {
     this.app = app
+    this.deleted = false
 
     this.id = data.id
     this.title = data.title
@@ -18,7 +19,9 @@ class Article {
   }
 
   async delete () {
-
+    await dbquery.article.delete(this.app.db, { id: this.id })
+    this.deleted = true
+    this.app.articles.cache.del(this.id)
   }
 }
 

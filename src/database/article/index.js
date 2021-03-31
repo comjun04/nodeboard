@@ -3,5 +3,6 @@ module.exports = {
   get: require('./get'),
   getIds: require('./getIds'),
   edit: require('./edit'),
-  exists: require('./exists')
+  exists: require('./exists'),
+  delete: require('./delete')
 }
