@@ -28,7 +28,7 @@ router
     return
   }
 
-  const { title, content } = data
+  const { title, content, useHTML } = data
   await ctx.state.app.articles.create({
     title,
     content

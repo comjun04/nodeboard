@@ -21,7 +21,13 @@
           <label for="content" class="form-label">내용</label>
           <textarea name="content" id="content" class="form-control" rows=10><%= isEdit ? content : '' %></textarea>
         </div>
-        <input type="submit" value="<%= isEdit ? '수정' : '저장' %>" class="btn btn-success">
+
+        <div class="form-check">
+          <input type="checkbox" name="useHTML" id="useHTML" class="form-check-input">
+          <label for="useHTML" class="fomr-check-label">HTML 사용</label>
+        </div>
+        
+        <input type="submit" value="<%= isEdit ? '수정' : '저장' %>" class="btn btn-success mt-2">
       </form>
     </main>
 
