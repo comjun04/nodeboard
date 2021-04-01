@@ -2,6 +2,7 @@ const LRU = require('lru-cache')
 
 const Article = require('../structures/Article')
 const dbquery = require('../database/methods')
+const { sanitizeHtml } = require('../utils/output')
 
 const debug = require('debug')('nodeboard:ArticleManager')
 
@@ -18,11 +19,17 @@ class ArticleManager {
     const { db } = this.app
 
     const title = articleData.title
-    const content = articleData.content
+    let content = articleData.content
+    const rawMode = articleData.useHTML
 
     debug('checking title and body is not empty')
     if (!articleData.title) throw new Error('title must not be empty')
     if (!articleData.content) throw new Error('content must not be empty')
+
+    // NOTE: sanitize html if rawMode is false
+    if (!rawMode) {
+      content = sanitizeHtml(content)
+    }
 
     debug('creating article to database')
     const data = await dbquery.article.create(db, {

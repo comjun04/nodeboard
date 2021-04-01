@@ -1,3 +1,5 @@
+const { replaceLineBreak } = require('../utils/output')
+
 const Router = require('@koa/router')
 const router = new Router()
 
@@ -12,6 +14,8 @@ router.get('/:id', async (ctx, next) => {
     ctx.status = 404
     return
   }
+
+  article.content = replaceLineBreak(article.content)
 
   await ctx.render('article', article)
 })
@@ -31,7 +35,8 @@ router
   const { title, content, useHTML } = data
   await ctx.state.app.articles.create({
     title,
-    content
+    content,
+    useHTML
   })
 
   // NOTE: Redirect when done

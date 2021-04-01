@@ -1,4 +1,5 @@
 const dbquery = require('../database/methods')
+const { sanitizeHtml } = require('../utils/output')
 
 class Article {
   constructor (app, data) {
@@ -14,6 +15,11 @@ class Article {
     const editData = { id: this.id }
     if (data.title) editData.title = data.title
     if (data.content) editData.content = data.content
+
+    // NOTE: sanitize html if rawMode is false
+    if (!data.useHTML) {
+      editData.content = sanitizeHtml(editData.content)
+    }
 
     await dbquery.article.edit(this.app.db, editData)
   }
