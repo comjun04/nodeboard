@@ -1,7 +1,8 @@
 module.exports = async (db, data = {}) => {
   const {
     title,
-    content
+    content,
+    rawMode
   } = data
 
   switch (db.type) {
@@ -15,13 +16,15 @@ module.exports = async (db, data = {}) => {
       db.obj.articles.push({
         id: articleId,
         title,
-        content
+        content,
+        raw: rawMode
       })
 
       return {
         id: articleId,
         title,
-        content
+        content,
+        raw: rawMode
       }
     }
   }

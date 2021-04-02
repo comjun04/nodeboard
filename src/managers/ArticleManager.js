@@ -26,11 +26,6 @@ class ArticleManager {
     if (!articleData.title) throw new Error('title must not be empty')
     if (!articleData.content) throw new Error('content must not be empty')
 
-    // NOTE: sanitize html if rawMode is false
-    if (!rawMode) {
-      content = sanitizeHtml(content)
-    }
-
     debug('creating article to database')
     const data = await dbquery.article.create(db, {
       title,

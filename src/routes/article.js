@@ -33,10 +33,11 @@ router
   }
 
   const { title, content, useHTML } = data
+  const rawMode = useHTML === 'on'
   await ctx.state.app.articles.create({
     title,
     content,
-    useHTML
+    rawMode
   })
 
   // NOTE: Redirect when done
@@ -63,15 +64,17 @@ router
       return
     }
 
-    const { title, content } = ctx.request.body
+    const { title, content, useHTML } = ctx.request.body
     if (!title || !content) {
       ctx.status = 400
       return
     }
+    const rawMode = useHTML === 'on'
 
     await article.edit({
       title,
-      content
+      content,
+      rawMode
     })
 
     ctx.redirect(`/article/${id}`)
