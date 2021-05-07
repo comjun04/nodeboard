@@ -77,4 +77,23 @@ router
     await ctx.redirect(`/article/${id}`)
   })
 
+/*
+ * Delete an article.
+ * <id> - The id of article
+ *
+ * Use POST instead of DELETE because HTML Form method does not support it
+ */
+router
+  .post('/article/:id/delete', async ctx => {
+    const id = ctx.params.id
+    const article = await ctx.state.app.articles.fetch(id)
+
+    // TODO: custom error page
+    if (!article) return ctx.status = 404
+    
+    await article.delete()
+
+    await ctx.redirect('/')
+  })
+
 module.exports = router

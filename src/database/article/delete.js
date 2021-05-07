@@ -5,6 +5,12 @@ module.exports = async (db, data = {}) => {
 
   if (!await exists(db, { id })) throw new Error('Not Found')
 
-  const articleList = db.get('articles')
-  const idx = articleList.findIndex()
+  switch (db.type) {
+    case 'internal': {
+      const articleList = db.obj.articles
+      const idx = articleList.findIndex(el => el.id === id)
+      articleList.splice(idx, 1)
+      break
+    }
+  }
 }

@@ -75,6 +75,11 @@ class ArticleManager {
       return data
     }
   }
+
+  async delete(article) {
+    this.cache.del(article.id)
+    await dbquery.article.delete(this.app.db, { id: article.id })
+  }
 }
 
 module.exports = ArticleManager

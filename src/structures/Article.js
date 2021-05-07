@@ -18,7 +18,7 @@ class Article {
   }
 
   async delete () {
-
+    await this.app.articles.delete(this)
   }
 }
 
