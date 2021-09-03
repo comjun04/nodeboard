@@ -9,9 +9,11 @@ module.exports = async (db, data = {}) => {
 
   switch (db.type) {
     case 'internal':
+    case 'json': {
       const article = await get(db, { id })
       article.title = title
       article.content = content
       break
+    }
   }
 }

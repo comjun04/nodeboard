@@ -4,6 +4,7 @@ module.exports = async (db, data = {}) => {
 
   switch (db.type) {
     case 'internal':
+    case 'json':
       return db.obj.articles[id]
   }
 }

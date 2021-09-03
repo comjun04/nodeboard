@@ -5,7 +5,8 @@ module.exports = async (db, data = {}) => {
   } = data
 
   switch (db.type) {
-    case 'internal': {
+    case 'internal':
+    case 'json': {
       const list = db.obj.articles
       const lastArticleId = list.length > 0 ?
         list[list.length - 1].id :
