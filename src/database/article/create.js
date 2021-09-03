@@ -1,12 +1,12 @@
 module.exports = async (db, data = {}) => {
   const {
     title,
-    content,
-    rawMode
+    content
   } = data
 
   switch (db.type) {
-    case 'internal': {
+    case 'internal':
+    case 'json': {
       const list = db.obj.articles
       const lastArticleId = list.length > 0 ?
         list[list.length - 1].id :
@@ -16,15 +16,13 @@ module.exports = async (db, data = {}) => {
       db.obj.articles.push({
         id: articleId,
         title,
-        content,
-        raw: rawMode
+        content
       })
 
       return {
         id: articleId,
         title,
-        content,
-        raw: rawMode
+        content
       }
     }
   }

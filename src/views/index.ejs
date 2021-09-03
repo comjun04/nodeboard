@@ -16,9 +16,14 @@
             <div class="card-body">
               <p class="card-text">
                 <small>Category</small>
+                  <form style="float: right;" method="POST" action="/article/<%= article.id %>/delete">
+
+                    <a href="/edit/<%= article.id %>" class="btn btn-outline-dark"><i class="fas fa-edit"></i></a>
+                    <button type="submit" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></button>
+                  </form>
               </p>
               <h4 class="card-title"><a href="/article/<%= article.id %>"><%= article.title %></a></h4>
-              <p class="card-text"><%- article.content %></p>
+              <p class="card-text"><%= article.content %></p>
             </div>
           </div>
 
@@ -28,5 +33,14 @@
     </main>
 
     <%- include('./_tail.ejs') %>
+
+    <script>
+      function confirmDelete () {
+        const answer = confirm('정말로 이 글을 삭제할까요?')
+        if (answer) {
+          alert('delete check test')
+        }
+      }
+    </script>
   </body>
 </html>

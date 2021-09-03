@@ -17,8 +17,7 @@
     "koa": "^2.13.0",
     "koa-bodyparser": "^4.3.0",
     "koa-views": "^7.0.0",
-    "lru-cache": "^6.0.0",
-    "sanitize-html": "^2.3.3"
+    "lru-cache": "^6.0.0"
   },
   "devDependencies": {
     "mocha": "^8.2.1",

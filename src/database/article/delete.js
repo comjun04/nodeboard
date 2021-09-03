@@ -7,7 +7,11 @@ module.exports = async (db, data = {}) => {
 
   switch (db.type) {
     case 'internal':
-      const idx = db.obj.articles.findIndex(el => el.id === id)
-      db.obj.articles.splice(idx, 1)
+    case 'json': {
+      const articleList = db.obj.articles
+      const idx = articleList.findIndex(el => el.id === id)
+      articleList.splice(idx, 1)
+      break
+    }
   }
 }

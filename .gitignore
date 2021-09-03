@@ -108,3 +108,9 @@ dist
 # Vim swap file
 *.swp
 *.swo
+
+# data files
+data/
+
+# config file
+config.js

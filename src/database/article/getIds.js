@@ -8,10 +8,10 @@ module.exports = async (db, data = {}) => {
 
   switch (db.type) {
     case 'internal':
+    case 'json': {
       const list = db.obj.articles
       const data = list.slice(-1 * limit).map(el => el.id)
       return data
-
-      break
+    }
   }
 }

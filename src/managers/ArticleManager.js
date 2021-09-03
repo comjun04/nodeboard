@@ -2,9 +2,8 @@ const LRU = require('lru-cache')
 
 const Article = require('../structures/Article')
 const dbquery = require('../database/methods')
-const { sanitizeHtml } = require('../utils/output')
 
-const debug = require('debug')('nodeboard:ArticleManager')
+const _debug = require('../utils/logger')('ArticleManager')
 
 class ArticleManager {
   constructor (app) {
@@ -15,12 +14,11 @@ class ArticleManager {
   }
 
   async create (articleData) {
-    debug('creating new article')
+    const debug = _debug.extendFunc('create')
     const { db } = this.app
 
     const title = articleData.title
-    let content = articleData.content
-    const rawMode = articleData.useHTML
+    const content = articleData.content
 
     debug('checking title and body is not empty')
     if (!articleData.title) throw new Error('title must not be empty')
@@ -39,6 +37,7 @@ class ArticleManager {
   }
 
   async fetch (idOrOptions) {
+    const debug = _debug.extendFunc('fetch')
     const { db } = this.app
 
     debug('fetch with options: %o', idOrOptions)
@@ -76,6 +75,14 @@ class ArticleManager {
 
       return data
     }
+  }
+
+  async delete(article) {
+    const debug = _debug.extendFunc('delete')
+
+    debug('deleting article from db')
+    this.cache.del(article.id)
+    await dbquery.article.delete(this.app.db, { id: article.id })
   }
 }
 
