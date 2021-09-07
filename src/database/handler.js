@@ -106,7 +106,7 @@ class DatabaseHandler {
         for await (const [propName, filename] of structEntries) {
           const filepath = path.join(path.resolve(), 'data', filename)
           const data = JSON.stringify(this.obj[propName]?? {})
-          console.log(this.obj, data)
+          console.log(this.obj)
 
           debug('writing to %o', filename)
           await fs.writeFile(filepath, data)

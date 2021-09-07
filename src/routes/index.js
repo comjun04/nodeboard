@@ -44,7 +44,7 @@ router
 })
 
 router
-  .get('/edit/:id', async ctx => {
+  .get('/article/:id/edit', async ctx => {
     const id = ctx.params.id
     const article = await ctx.state.app.articles.fetch(id)
     if (!article) {
@@ -54,7 +54,7 @@ router
 
   await ctx.render('write', article)
 })
-  .post('/edit/:id', async ctx => {
+  .post('/article/:id/edit', async ctx => {
     // TODO: 글이 삭제되었는지 우선 확인
     const id = ctx.params.id
     const article = await ctx.state.app.articles.fetch(id)
