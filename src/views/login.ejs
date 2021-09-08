@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+
+<head>
+  <%- include('./_head.ejs') %>
+</head>
+
+<body>
+  <%- include('./_nav.ejs', { navPage: 'login' }) %>
+
+  <main class="container-sm my-3">
+    <div class="mb-3 text-break">
+      <h1>로그인</h1>
+    </div>
+    <form method="POST" action="/login" onsubmit="return confirmDelete()">
+      <div class="mb-3">
+        <label for="username" class="form-label">사용자 이름</label>
+        <input type="text" id="username" class="form-control">
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">비밀번호</label>
+        <input type="password" id="password" class="form-control">
+      </div>
+      <input type="submit" value="로그인" class="btn btn-primary">
+    </form>
+  </main>
+
+  <%- include('./_tail.ejs') %>
+
+  </body>
+
+</html>
